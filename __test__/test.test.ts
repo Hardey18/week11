@@ -2,6 +2,17 @@ import app from "../app";
 import supertest from "supertest";
 import { doesNotMatch } from "assert";
 import { Response } from "express";
+import mongoose from 'mongoose';
+
+beforeAll(done => {
+  done()
+})
+
+afterAll(done => {
+  // Closing the DB connection allows Jest to exit successfully.
+  mongoose.connection.close()
+  done()
+})
 
 const request: any = supertest(app);
 describe("Test all routes", () => {
