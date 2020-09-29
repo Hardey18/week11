@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "NODE_ENV=development node ./bin/www",
     "test": "jest",
-    "tsc": "tsc -w"
+    "tsc": "tsc"
   },
   "dependencies": {
     "@types/bcrypt": "^3.0.0",
