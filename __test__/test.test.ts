@@ -37,18 +37,7 @@ describe("Test all routes", () => {
           done()
     });
   })
-  it("Gets all organizations", async (done) => {
-    request
-      .post("/graphql2")
-      .send({ query: "{organizations{organization}}" })
-      .set("Accept", "application.json")
-      .expect("Content-Type", /json/)
-      .end(function (err, res) {
-        if(err) done(err)
-        expect(res.body).toBeInstanceOf(Object);
-        done();
-      });
-  });
+  
 
   it("Get Organization using ID", async (done) => {
     request
@@ -122,6 +111,18 @@ describe("Test all routes", () => {
         let val = res.body.data.deleteOrganization;
         expect(val).toHaveProperty("organization", "Facebook Inc.")
         expect(val).toHaveProperty("country", "Nigeria")
+        done();
+      });
+  });
+  it("Gets all organizations", async (done) => {
+    request
+      .post("/graphql2")
+      .send({ query: "{organizations{organization}}" })
+      .set("Accept", "application.json")
+      .expect("Content-Type", /json/)
+      .end(function (err, res) {
+        if(err) done(err)
+        expect(res.body).toBeInstanceOf(Object);
         done();
       });
   });
