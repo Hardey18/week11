@@ -6,7 +6,6 @@ import mongoose from 'mongoose';
 const request: any = supertest(app);
 
 beforeAll(done => {
-  jest.setTimeout(10000)
   done()
 })
 
