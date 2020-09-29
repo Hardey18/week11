@@ -25,6 +25,7 @@ mongoose.connect('mongodb+srv://dbnurudeen:nurudeen992@cluster0.89qyi.mongodb.ne
 //   console.log('connected to database');
 // })
 
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
