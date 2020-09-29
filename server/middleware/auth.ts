@@ -15,11 +15,11 @@ async function auth (req: any) {
         id: user.id,
         email: user["email"]
     };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: '2h'
-    })
-    req.headers.authorization = token;
-    return req;
+    // const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    //     expiresIn: '2h'
+    // })
+    // req.headers.authorization = token;
+    // return req;
 }
 
 export default auth;
