@@ -9,9 +9,9 @@ beforeAll(done => {
   done()
 })
 
-beforeEach(() => {
-  jest.setTimeout(10000);
-}); 
+// beforeEach(() => {
+//   jest.setTimeout(10000);
+// }); 
 
 afterAll(done => {
   // Closing the DB connection allows Jest to exit successfully.

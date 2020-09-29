@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=development node ./bin/www",
-    "test": "jest",
+    "test": "jest --forceExit",
     "tsc": "tsc"
   },
   "dependencies": {

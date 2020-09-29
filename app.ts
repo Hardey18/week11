@@ -17,11 +17,13 @@ mongoose.connect('mongodb+srv://dbnurudeen:nurudeen992@cluster0.89qyi.mongodb.ne
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true
-});
-
-db.once('open', () => {
-  console.log('connected to database');
 })
+.then(() => console.log("Connected to Database"))
+.catch(err => console.log(err))
+
+// db.once('open', () => {
+//   console.log('connected to database');
+// })
 
 app.use(logger('dev'));
 app.use(express.json());
