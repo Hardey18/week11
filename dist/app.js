@@ -14,12 +14,13 @@ var schema_1 = require("./src/schema/schema");
 var schema_2 = require("./server/schema/schema");
 var mongoose_1 = __importDefault(require("mongoose"));
 var app = express_1.default();
+var db = mongoose_1.default.connection;
 mongoose_1.default.connect('mongodb+srv://dbnurudeen:nurudeen992@cluster0.89qyi.mongodb.net/week9', {
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true
 });
-mongoose_1.default.connection.on('open', function () {
+db.once('open', function () {
     console.log('connected to database');
 });
 app.use(morgan_1.default('dev'));

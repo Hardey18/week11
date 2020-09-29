@@ -11,6 +11,7 @@ import { firstSchema } from './server/schema/schema';
 import mongoose from 'mongoose';
 
 const app = express();
+const db = mongoose.connection;
 
 mongoose.connect('mongodb+srv://dbnurudeen:nurudeen992@cluster0.89qyi.mongodb.net/week9', {
     useNewUrlParser: true,
@@ -18,7 +19,7 @@ mongoose.connect('mongodb+srv://dbnurudeen:nurudeen992@cluster0.89qyi.mongodb.ne
     useUnifiedTopology: true
 });
 
-mongoose.connection.on('open', () => {
+db.once('open', () => {
   console.log('connected to database');
 })
 
