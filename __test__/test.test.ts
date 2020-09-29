@@ -3,7 +3,7 @@ import app from "../app";
 // import { Response } from "express";
 import mongoose from 'mongoose';
 
-const request: any = supertest(app);
+const request = supertest(app);
 
 beforeAll(done => {
   done()
@@ -21,8 +21,7 @@ afterAll(done => {
 describe("Test all routes", () => {
   it("Test Status code for Correct Query", async () => {
     try {
-      const response = request("/graphql2")
-        .post("/graphql")
+      const response = request.post("/graphql")
         .send({ query: "{organizations{ceo}}" })
         .expect(200);
     } catch (error) {
