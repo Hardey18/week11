@@ -6,9 +6,12 @@ import mongoose from 'mongoose';
 const request: any = supertest(app);
 
 beforeAll(done => {
-  jest.setTimeout(30000);
   done()
 })
+
+beforeEach(() => {
+  jest.setTimeout(10000);
+}); 
 
 afterAll(done => {
   // Closing the DB connection allows Jest to exit successfully.

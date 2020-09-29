@@ -1,9 +1,9 @@
 const createError = require('http-errors');
 import express from 'express';
-import auth from './server/middleware/auth'
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import auth from './server/middleware/auth';
+// import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
 
 import { graphqlHTTP } from 'express-graphql';
 import { schema } from './src/schema/schema';

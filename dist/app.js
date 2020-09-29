@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var createError = require('http-errors');
 var express_1 = __importDefault(require("express"));
 var auth_1 = __importDefault(require("./server/middleware/auth"));
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+// import path from 'path';
+var cookie_parser_1 = __importDefault(require("cookie-parser"));
+var morgan_1 = __importDefault(require("morgan"));
 var express_graphql_1 = require("express-graphql");
 var schema_1 = require("./src/schema/schema");
 var schema_2 = require("./server/schema/schema");
@@ -22,10 +22,10 @@ mongoose_1.default.connect('mongodb+srv://dbnurudeen:nurudeen992@cluster0.89qyi.
 mongoose_1.default.connection.once('open', function () {
     console.log('connected to database');
 });
-app.use(logger('dev'));
+app.use(morgan_1.default('dev'));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookie_parser_1.default());
 app.use("/graphql", express_graphql_1.graphqlHTTP({
     schema: schema_1.schema,
     graphiql: true
