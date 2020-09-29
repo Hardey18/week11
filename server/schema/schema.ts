@@ -111,11 +111,9 @@ const Mutation = new GraphQLObjectType({
                     
                     const id = user.id;
                     const payload = { email: email, id: id };
-                    // const secret = process.env.ACCESS_TOKEN_SECRET as string;
                     const token = jwt.sign(payload, process.env.JWT_SECRET, {
                         expiresIn: "10m"
                     });
-                    console.log(token, "<<<<<<<<<<Password>>>>>>>>>>>>>>");
               
                     user["token"] = token;
                     return user;

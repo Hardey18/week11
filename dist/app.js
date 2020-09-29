@@ -19,7 +19,7 @@ mongoose_1.default.connect('mongodb+srv://dbnurudeen:nurudeen992@cluster0.89qyi.
     useFindAndModify: false,
     useUnifiedTopology: true
 });
-mongoose_1.default.connection.once('open', function () {
+mongoose_1.default.connection.on('open', function () {
     console.log('connected to database');
 });
 app.use(morgan_1.default('dev'));

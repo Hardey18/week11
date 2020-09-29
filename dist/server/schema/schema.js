@@ -178,7 +178,6 @@ var Mutation = new graphql_1.GraphQLObjectType({
                                 token = jsonwebtoken_1.default.sign(payload, process.env.JWT_SECRET, {
                                     expiresIn: "10m"
                                 });
-                                console.log(token, "<<<<<<<<<<Password>>>>>>>>>>>>>>");
                                 user["token"] = token;
                                 return [2 /*return*/, user];
                             case 3:

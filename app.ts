@@ -18,7 +18,7 @@ mongoose.connect('mongodb+srv://dbnurudeen:nurudeen992@cluster0.89qyi.mongodb.ne
     useUnifiedTopology: true
 });
 
-mongoose.connection.once('open', () => {
+mongoose.connection.on('open', () => {
   console.log('connected to database');
 })
 
