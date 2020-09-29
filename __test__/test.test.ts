@@ -1,5 +1,5 @@
-import app from "../app";
 import supertest from "supertest";
+import app from "../app";
 // import { Response } from "express";
 import mongoose from 'mongoose';
 
@@ -56,7 +56,7 @@ describe("Test all routes", () => {
       });
   });
 
-  it("Add new Organization", async (done) => {
+  it("Add new Organization", function (done) {
     request
       .post("/graphql2")
       .send({
@@ -75,7 +75,7 @@ describe("Test all routes", () => {
       });
     });
     
-    it("Update Organization", async (done) => {
+    it("Update Organization", function (done) {
       request
       .post("/graphql2")
       .send({
@@ -95,7 +95,7 @@ describe("Test all routes", () => {
       });
   });
 
-  it("Delete Organization", async (done) => {
+  it("Delete Organization", function (done) {
     request
       .post("/graphql2")
       .send({
@@ -113,7 +113,7 @@ describe("Test all routes", () => {
         done();
       });
   });
-  it("Gets all organizations", async (done) => {
+  it("Gets all organizations", function (done) {
     request
       .post("/graphql2")
       .send({ query: "{organizations{organization}}" })
