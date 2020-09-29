@@ -1,5 +1,7 @@
 import { Organization, validateOrganization } from '../models/organization';
-import { User, validateUser } from '../models/users'
+import { User, validateUser, validateLogin } from '../models/users'
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
 import { 
     GraphQLObjectType,
     GraphQLString,
@@ -9,7 +11,6 @@ import {
     GraphQLList,
     GraphQLNonNull
 } from 'graphql';
-import { isContext } from 'vm';
 
 const OrganizationType = new GraphQLObjectType({
     name: 'Organization',
@@ -76,11 +77,11 @@ const Mutation = new GraphQLObjectType({
             async resolve(parent, args){
                 const { error } = validateUser(args);
                 if (error) throw new Error(error.details[0].message);
-
+                let hashPass = await bcrypt.hashSync(args.password, 10);
                 let register = new User({
                     name: args.name,
                     email: args.email,
-                    password: args.password
+                    password: hashPass
                 });
                 return register.save();
             }
@@ -92,7 +93,35 @@ const Mutation = new GraphQLObjectType({
                 password: { type: new GraphQLNonNull(GraphQLString) }
             },
             async resolve(parent, args){
-                
+                try {
+                    validateLogin(args)
+                    const { email, password } = args;
+              
+                    const user = await User.findOne({email});
+              
+                    if (!user) {
+                      throw new Error("User does not exists");
+                    }
+              
+                    const hashPassword = user["password"];
+                    const validPass = await bcrypt.compare(password, hashPassword);
+                    if (!validPass) {
+                        throw new Error("Incorrect email or password");
+                    }
+                    
+                    const id = user.id;
+                    const payload = { email: email, id: id };
+                    // const secret = process.env.ACCESS_TOKEN_SECRET as string;
+                    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                        expiresIn: "10m"
+                    });
+                    console.log(token, "<<<<<<<<<<Password>>>>>>>>>>>>>>");
+              
+                    user["token"] = token;
+                    return user;
+                  } catch (err) {
+                    return err;
+                  }
             }
         },
         addOrganization: {

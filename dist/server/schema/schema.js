@@ -35,10 +35,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.firstSchema = void 0;
 var organization_1 = require("../models/organization");
 var users_1 = require("../models/users");
+var bcrypt_1 = __importDefault(require("bcrypt"));
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var graphql_1 = require("graphql");
 var OrganizationType = new graphql_1.GraphQLObjectType({
     name: 'Organization',
@@ -119,17 +124,23 @@ var Mutation = new graphql_1.GraphQLObjectType({
             },
             resolve: function (parent, args) {
                 return __awaiter(this, void 0, void 0, function () {
-                    var error, register;
+                    var error, hashPass, register;
                     return __generator(this, function (_a) {
-                        error = users_1.validateUser(args).error;
-                        if (error)
-                            throw new Error(error.details[0].message);
-                        register = new users_1.User({
-                            name: args.name,
-                            email: args.email,
-                            password: args.password
-                        });
-                        return [2 /*return*/, register.save()];
+                        switch (_a.label) {
+                            case 0:
+                                error = users_1.validateUser(args).error;
+                                if (error)
+                                    throw new Error(error.details[0].message);
+                                return [4 /*yield*/, bcrypt_1.default.hashSync(args.password, 10)];
+                            case 1:
+                                hashPass = _a.sent();
+                                register = new users_1.User({
+                                    name: args.name,
+                                    email: args.email,
+                                    password: hashPass
+                                });
+                                return [2 /*return*/, register.save()];
+                        }
                     });
                 });
             }
@@ -142,8 +153,39 @@ var Mutation = new graphql_1.GraphQLObjectType({
             },
             resolve: function (parent, args) {
                 return __awaiter(this, void 0, void 0, function () {
+                    var email, password, user, hashPassword, validPass, id, payload, token, err_1;
                     return __generator(this, function (_a) {
-                        return [2 /*return*/];
+                        switch (_a.label) {
+                            case 0:
+                                _a.trys.push([0, 3, , 4]);
+                                users_1.validateLogin(args);
+                                email = args.email, password = args.password;
+                                return [4 /*yield*/, users_1.User.findOne({ email: email })];
+                            case 1:
+                                user = _a.sent();
+                                if (!user) {
+                                    throw new Error("User does not exists");
+                                }
+                                hashPassword = user["password"];
+                                return [4 /*yield*/, bcrypt_1.default.compare(password, hashPassword)];
+                            case 2:
+                                validPass = _a.sent();
+                                if (!validPass) {
+                                    throw new Error("Incorrect email or password");
+                                }
+                                id = user.id;
+                                payload = { email: email, id: id };
+                                token = jsonwebtoken_1.default.sign(payload, process.env.JWT_SECRET, {
+                                    expiresIn: "10m"
+                                });
+                                console.log(token, "<<<<<<<<<<Password>>>>>>>>>>>>>>");
+                                user["token"] = token;
+                                return [2 /*return*/, user];
+                            case 3:
+                                err_1 = _a.sent();
+                                return [2 /*return*/, err_1];
+                            case 4: return [2 /*return*/];
+                        }
                     });
                 });
             }

@@ -37,7 +37,6 @@ describe("Test all routes", () => {
     });
   })
   
-
   it("Get Organization using ID", async (done) => {
     request
       .post("/graphql2")
@@ -56,12 +55,12 @@ describe("Test all routes", () => {
       });
   });
 
-  it("Add new Organization", function (done) {
+  it("Add new Organization", async (done) => {
     request
       .post("/graphql2")
       .send({
         query:
-          'mutation{addOrganization(organization: "Facebook Inc.", ceo: "Robert", country: "Germany", marketValue: "12%", employees: ["Clark", "Martin"], products: ["React", "Native"], address: "Oshogbo") { id organization address country }}',
+          'mutation{addOrganization(organization: "Facebook Inc.", ceo: "Robert", country: "Germany", marketValue: "12%", employees: ["Clark", "Martin"], products: ["React", "Native"], address: "Lincoln street") { id organization address country }}',
       })
       .set("Accept", "application.json")
       .expect("Content-Type", /json/)
@@ -69,13 +68,14 @@ describe("Test all routes", () => {
         if (err) return done(err);
         expect(res.body).toBeInstanceOf(Object);
         let val = res.body.data.addOrganization;
-        expect(val).toHaveProperty("address", "Oshogbo")
+        console.log(res.body);
+        expect(val).toHaveProperty("address", "Lincoln street");
         expect(val).toHaveProperty("organization", "Facebook Inc.");
         done();
       });
     });
     
-    it("Update Organization", function (done) {
+    it("Update Organization", async (done) => {
       request
       .post("/graphql2")
       .send({
@@ -95,7 +95,7 @@ describe("Test all routes", () => {
       });
   });
 
-  it("Delete Organization", function (done) {
+  it("Delete Organization", async (done) => {
     request
       .post("/graphql2")
       .send({
@@ -107,13 +107,14 @@ describe("Test all routes", () => {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.body).toBeInstanceOf(Object);
+        console.log(res.body);
         let val = res.body.data.deleteOrganization;
         expect(val).toHaveProperty("organization", "Facebook Inc.")
         expect(val).toHaveProperty("country", "Nigeria")
         done();
       });
   });
-  it("Gets all organizations", function (done) {
+  it("Gets all organizations", async (done) => {
     request
       .post("/graphql2")
       .send({ query: "{organizations{organization}}" })
