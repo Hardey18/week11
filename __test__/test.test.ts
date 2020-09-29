@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 const request: any = supertest(app);
 
 beforeAll(done => {
+  jest.setTimeout(10000)
   done()
 })
 
@@ -68,7 +69,6 @@ describe("Test all routes", () => {
         if (err) return done(err);
         expect(res.body).toBeInstanceOf(Object);
         let val = res.body.data.addOrganization;
-        console.log(res.body);
         expect(val).toHaveProperty("address", "Lincoln street");
         expect(val).toHaveProperty("organization", "Facebook Inc.");
         done();
@@ -87,7 +87,6 @@ describe("Test all routes", () => {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.body).toBeInstanceOf(Object);
-        console.log(res.body);
         let val = res.body.data.updateOrganization;
         expect(val).toHaveProperty("ceo", "Mugabe")
         expect(val).toHaveProperty("country", "Nigeria")
@@ -107,7 +106,6 @@ describe("Test all routes", () => {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.body).toBeInstanceOf(Object);
-        console.log(res.body);
         let val = res.body.data.deleteOrganization;
         expect(val).toHaveProperty("organization", "Facebook Inc.")
         expect(val).toHaveProperty("country", "Nigeria")
