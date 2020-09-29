@@ -1,4 +1,4 @@
-const createError = require('http-errors');
+import createError from 'http-errors';
 import express from 'express';
 import auth from './server/middleware/auth';
 // import path from 'path';

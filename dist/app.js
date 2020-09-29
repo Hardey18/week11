@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var createError = require('http-errors');
+var http_errors_1 = __importDefault(require("http-errors"));
 var express_1 = __importDefault(require("express"));
 var auth_1 = __importDefault(require("./server/middleware/auth"));
 // import path from 'path';
@@ -37,7 +37,7 @@ app.use("/graphql2", express_graphql_1.graphqlHTTP(function (req) { return ({
 }); }));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    next(createError(404));
+    next(http_errors_1.default(404));
 });
 // error handler
 app.use(function (err, req, res, next) {
