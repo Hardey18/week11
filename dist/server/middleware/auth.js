@@ -43,6 +43,7 @@ var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var users_1 = require("../models/users");
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+var secret = process.env.JWT_SECRET;
 function auth(req) {
     return __awaiter(this, void 0, void 0, function () {
         var input, user, payload, token;
@@ -60,7 +61,7 @@ function auth(req) {
                         id: user.id,
                         email: user["email"]
                     };
-                    token = jsonwebtoken_1.default.sign(payload, process.env.JWT_SECRET, {
+                    token = jsonwebtoken_1.default.sign(payload, secret, {
                         expiresIn: '2h'
                     });
                     req.headers.authorization = token;
