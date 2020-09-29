@@ -1,8 +1,9 @@
 import app from "../app";
 import supertest from "supertest";
-import { doesNotMatch } from "assert";
-import { Response } from "express";
+// import { Response } from "express";
 import mongoose from 'mongoose';
+
+const request: any = supertest(app);
 
 beforeAll(done => {
   done()
@@ -13,8 +14,6 @@ afterAll(done => {
   mongoose.connection.close()
   done()
 })
-
-const request: any = supertest(app);
 describe("Test all routes", () => {
   it("Test Status code for Correct Query", async () => {
     try {
@@ -31,7 +30,7 @@ describe("Test all routes", () => {
     request.post("/graphql")
         .send({ query: "{organizations{cu}}" })
         .expect(400)
-        .end((err,res:Response)=>{
+        .end((err,res)=>{
           if(err) done(err)
           expect(res.status).toBe(400)
           done()
