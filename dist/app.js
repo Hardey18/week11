@@ -19,10 +19,12 @@ mongoose_1.default.connect('mongodb+srv://dbnurudeen:nurudeen992@cluster0.89qyi.
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true
-});
-db.once('open', function () {
-    console.log('connected to database');
-});
+})
+    .then(function () { return console.log("Connected to Database"); })
+    .catch(function (err) { return console.log(err); });
+// db.once('open', () => {
+//   console.log('connected to database');
+// })
 app.use(morgan_1.default('dev'));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));

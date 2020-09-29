@@ -16,6 +16,7 @@
     "@types/joi": "^14.3.4",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/mongoose": "^5.7.36",
+    "@types/node": "^14.11.2",
     "@types/pg": "^7.14.4",
     "@types/supertest": "^2.0.10",
     "bcrypt": "^5.0.0",
@@ -35,8 +36,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.3",
     "morgan": "~1.9.1",
-    "supertest": "^4.0.2",
-    "@types/node": "^14.11.2"
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",
