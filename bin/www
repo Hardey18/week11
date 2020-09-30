@@ -3,6 +3,10 @@
 /**
  * Module dependencies.
  */
+/**
+ * Require and configure dotenv
+ */
+require('dotenv').config();
 
 var app = require('../dist/app').default;
 var debug = require('debug')('week-9-task-hardey18:server');
