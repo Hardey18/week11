@@ -3,7 +3,7 @@ import { User } from '../models/users';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const secret = process.env.JWT_SECRET
+const secret = process.env.JWT_SECRET!
 async function auth (req: any) {
     const input = "nurudeen@gmail.com";
     
