@@ -152,7 +152,7 @@ var Mutation = new graphql_1.GraphQLObjectType({
             },
             resolve: function (parent, args) {
                 return __awaiter(this, void 0, void 0, function () {
-                    var email, password, user, hashPassword, validPass, id, payload, err_1;
+                    var email, password, user, hashPassword, validPass, id, err_1;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
@@ -173,7 +173,7 @@ var Mutation = new graphql_1.GraphQLObjectType({
                                     throw new Error("Incorrect email or password");
                                 }
                                 id = user.id;
-                                payload = { email: email, id: id };
+                                // const payload = { email: email, id: id };
                                 // const token = jwt.sign(payload, process.env.JWT_SECRET, {
                                 //     expiresIn: "10m"
                                 // });

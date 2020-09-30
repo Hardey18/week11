@@ -11,15 +11,15 @@ async function auth (req: any) {
     if (!user) {
         throw Error ("Authentication failed!")
     }
-    const payload = {
-        id: user.id,
-        email: user["email"]
-    };
-    const token = jwt.sign(payload, secret, {
-        expiresIn: '2h'
-    })
-    req.headers.authorization = token;
-    return req;
+    // const payload = {
+    //     id: user.id,
+    //     email: user["email"]
+    // };
+    // const token = jwt.sign(payload, secret, {
+    //     expiresIn: '2h'
+    // })
+    // req.headers.authorization = token;
+    // return req;
 }
 
 export default auth;

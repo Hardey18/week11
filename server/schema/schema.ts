@@ -110,12 +110,12 @@ const Mutation = new GraphQLObjectType({
                     }
                     
                     const id = user.id;
-                    const payload = { email: email, id: id };
-                    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-                        expiresIn: "10m"
-                    });
+                    // const payload = { email: email, id: id };
+                    // const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                    //     expiresIn: "10m"
+                    // });
               
-                    user["token"] = token;
+                    // user["token"] = token;
                     return user;
                   } catch (err) {
                     return err;
