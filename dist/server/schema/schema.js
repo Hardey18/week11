@@ -43,6 +43,7 @@ exports.firstSchema = void 0;
 var organization_1 = require("../models/organization");
 var users_1 = require("../models/users");
 var bcrypt_1 = __importDefault(require("bcrypt"));
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var graphql_1 = require("graphql");
 var OrganizationType = new graphql_1.GraphQLObjectType({
     name: 'Organization',
@@ -152,7 +153,7 @@ var Mutation = new graphql_1.GraphQLObjectType({
             },
             resolve: function (parent, args) {
                 return __awaiter(this, void 0, void 0, function () {
-                    var email, password, user, hashPassword, validPass, id, err_1;
+                    var email, password, user, hashPassword, validPass, id, payload, token, err_1;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
@@ -173,11 +174,11 @@ var Mutation = new graphql_1.GraphQLObjectType({
                                     throw new Error("Incorrect email or password");
                                 }
                                 id = user.id;
-                                // const payload = { email: email, id: id };
-                                // const token = jwt.sign(payload, process.env.JWT_SECRET, {
-                                //     expiresIn: "10m"
-                                // });
-                                // user["token"] = token;
+                                payload = { email: email, id: id };
+                                token = jsonwebtoken_1.default.sign(payload, process.env.JWT_SECRET, {
+                                    expiresIn: "10m"
+                                });
+                                user["token"] = token;
                                 return [2 /*return*/, user];
                             case 3:
                                 err_1 = _a.sent();

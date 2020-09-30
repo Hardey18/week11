@@ -39,13 +39,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var users_1 = require("../models/users");
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-// const secret = process.env.JWT_SECRET
+var secret = process.env.JWT_SECRET;
 function auth(req) {
     return __awaiter(this, void 0, void 0, function () {
-        var input, user;
+        var input, user, payload, token;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -56,7 +57,15 @@ function auth(req) {
                     if (!user) {
                         throw Error("Authentication failed!");
                     }
-                    return [2 /*return*/];
+                    payload = {
+                        id: user.id,
+                        email: user["email"]
+                    };
+                    token = jsonwebtoken_1.default.sign(payload, secret, {
+                        expiresIn: '2h'
+                    });
+                    req.headers.authorization = token;
+                    return [2 /*return*/, req];
             }
         });
     });
