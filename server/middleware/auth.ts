@@ -3,7 +3,7 @@ import { User } from '../models/users';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const secret = process.env.JWT_SECRET!
+const secret = process.env.JWT_SECRET
 async function auth (req: any) {
     const input = "nurudeen@gmail.com";
     
@@ -11,15 +11,15 @@ async function auth (req: any) {
     if (!user) {
         throw Error ("Authentication failed!")
     }
-    const payload = {
-        id: user.id,
-        email: user["email"]
-    };
-    const token = jwt.sign(payload, secret, {
-        expiresIn: '2h'
-    })
-    req.headers.authorization = token;
-    return req;
+    // const payload = {
+    //     id: user.id,
+    //     email: user["email"]
+    // };
+    // const token = jwt.sign(payload, secret, {
+    //     expiresIn: '2h'
+    // })
+    // req.headers.authorization = token;
+    // return req;
 }
 
 export default auth;
