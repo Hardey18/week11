@@ -1,1 +1,1 @@
-worker=NODE_ENV=development node ./bin/www
+worker: node ./bin/www
