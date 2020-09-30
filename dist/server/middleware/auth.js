@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var users_1 = require("../models/users");
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-var secret = process.env.JWT_SECRET;
+// const secret = process.env.JWT_SECRET
 function auth(req) {
     return __awaiter(this, void 0, void 0, function () {
         var input, user;
