@@ -41,6 +41,7 @@
     "jest": "^26.4.2"
   },
   "devDependencies": {
+    "chalk": "^4.1.0",
     "nodemon": "^2.0.4",
     "ts-jest": "^26.3.0",
     "tslint": "^6.1.3",

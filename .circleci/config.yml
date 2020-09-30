@@ -8,5 +8,4 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npx tsc
       - run: npm run test
