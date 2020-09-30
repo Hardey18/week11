@@ -111,7 +111,7 @@ const Mutation = new GraphQLObjectType({
                     
                     const id = user.id;
                     const payload = { email: email, id: id };
-                    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                    const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
                         expiresIn: "10m"
                     });
               
